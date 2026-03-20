@@ -1,0 +1,6 @@
+POST http://localhost:3000/api/message
+Content-Type: application/json
+
+{
+  "message": "Hello, World!"
+}

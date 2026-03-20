@@ -67,12 +67,28 @@ app.post("/api/message", (req, res) => {
   //   .catch((error) => {
   //     res.status(500).json({ response: error.message });
   //   });
-  res.json({
-    response: require("fs").readFileSync(
-      path.join(__dirname, "tmp", "response.txt"),
-      "utf8",
-    ),
-  });
+  const response = require("fs").readFileSync(
+    path.join(__dirname, "tmp", "response.txt"),
+    "utf8",
+  );
+
+  const parts = response.split('"wrb.fr"');
+
+  res.setHeader("Content-Type", "text/plain");
+  res.setHeader("Transfer-Encoding", "chunked");
+  let i = 0;
+  function writeNextPart() {
+    if (i < parts.length) {
+      console.log("Sending part:", i);
+      res.write(parts[i] + "\n");
+      i++;
+      setTimeout(writeNextPart, 1000);
+    } else {
+      console.log("All parts sent");
+      res.end();
+    }
+  }
+  writeNextPart();
 });
 
 app.listen(PORT, () => {

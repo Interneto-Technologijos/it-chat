@@ -14,10 +14,9 @@ const getResponse = (chatMessageElement, message, cb) => {
             cb();
             return;
           }
-          chatMessageElement.innerHTML = new TextDecoder()
-            .decode(value)
-            .replaceAll(/\\\\n/g, "<br>");
-          // .replaceAll(/\*\*(.+)\*\*/g, "<b>$1</b>");
+          chatMessageElement.innerHTML = marked.parse(
+            new TextDecoder().decode(value),
+          );
           return readChunk();
         });
       }

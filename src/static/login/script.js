@@ -16,7 +16,7 @@ loginButton.addEventListener("click", () => {
     return;
   }
   loginButton.disabled = true;
-  fetch("http://localhost:3000/api/login", {
+  fetch("https://localhost:3000/api/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

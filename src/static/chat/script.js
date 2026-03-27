@@ -30,7 +30,7 @@ sendButton.addEventListener("click", () => {
 
 logoutButton.addEventListener("click", () => {
   logoutButton.disabled = true;
-  fetch("http://localhost:3000/api/logout", {
+  fetch("https://localhost:3000/api/logout", {
     method: "POST",
   })
     .then((response) => {

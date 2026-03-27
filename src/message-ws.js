@@ -71,8 +71,6 @@ apiRouter.post("/message", (req, res) => {
             message = "";
           } catch (error) {
             console.log("Error parsing message:", error.message);
-            console.log("Raw message:", message);
-            res.write("Error parsing message: " + error.message + "\n");
             message = "";
             return;
           }

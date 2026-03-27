@@ -1,19 +1,26 @@
 <html>
   <head>
-    <meta charset="UTF-8" />
     <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div id="container">
       <div><h1>Login</h1></div>
-      <div>
-        <form>
-          <label for="username">Student ID:</label>
-          <input type="password" id="studentId" name="studentId" required />
-          <button type="button" id="loginButton">Login</button>
-        </form>
-      </div>
+      <form>
+        <div id="loginContainer">
+          <div>
+            <label for="username">Student ID:</label>
+          </div>
+          <div>
+            <input type="password" id="studentId" name="studentId" required />
+          </div>
+          <div>
+            <button type="button" id="loginButton">Login</button>
+          </div>
+        </div>
+      </form>
     </div>
     <script src="script.js"></script>
   </body>

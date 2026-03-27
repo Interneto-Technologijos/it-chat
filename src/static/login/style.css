@@ -1,0 +1,13 @@
+#loginContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (max-width: 450px) {
+  #loginContainer {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

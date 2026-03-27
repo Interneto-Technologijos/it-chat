@@ -20,6 +20,11 @@ apiRouter.post("/login", (req, res) => {
   }
 });
 
+apiRouter.post("/logout", (_req, res) => {
+  res.clearCookie("studentId");
+  res.status(200).json({});
+});
+
 apiRouter.get("/profile", (req, res) => {
   const { studentId } = req.cookies;
   if (STUDENT_IDS.includes(studentId)) {

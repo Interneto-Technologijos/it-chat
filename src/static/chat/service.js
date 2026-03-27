@@ -7,6 +7,10 @@ const getResponse = (chatMessageElement, message, cb) => {
     body: JSON.stringify({ message }),
   })
     .then((response) => {
+      if (!response.ok) {
+        window.location = "/login/index.html";
+        return;
+      }
       const reader = response.body.getReader();
       function readChunk() {
         return reader.read().then(({ done, value }) => {

@@ -1,46 +1,13 @@
-require("dotenv").config();
-
-const express = require("express");
 const axios = require("axios");
-const path = require("path");
 
-// axios.interceptors.request.use((request) => {
-//   console.log("Axios Request:", {
-//     url: request.url,
-//     method: request.method,
-//     headers: request.headers,
-//     data: request.data,
-//   });
-//   return request;
-// });
+const { apiRouter } = require("./web-server");
+const { isStudentIdValid } = require("./auth-ws");
 
-// axios.interceptors.response.use(
-//   (response) => {
-//     console.log("Axios Response:", {
-//       status: response.status,
-//       data: response.data,
-//     });
-//     return response;
-//   },
-//   (error) => {
-//     console.log("Axios Error:", {
-//       message: error.message,
-//       status: error.response.status,
-//       data: error.response.data,
-//     });
-//     return Promise.reject(error);
-//   },
-// );
-
-const app = express();
-const PORT = 3000;
-
-app.use(express.json());
-
-app.use(express.static(path.join(__dirname, "static")));
-app.use(express.static(path.join(__dirname, "static")));
-
-app.post("/api/message", (req, res) => {
+apiRouter.post("/message", (req, res) => {
+  if (!isStudentIdValid(req)) {
+    res.status(401).send("Unauthorized");
+    return;
+  }
   const { message } = req.body;
   console.log("Received message:", message);
 
@@ -113,8 +80,4 @@ app.post("/api/message", (req, res) => {
       res.write(error.message + "\n");
       res.end();
     });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
 });

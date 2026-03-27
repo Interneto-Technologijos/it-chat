@@ -11,6 +11,15 @@ apiRouter.post("/message", (req, res) => {
   const { message } = req.body;
   console.log("Received message:", message);
 
+  if (
+    typeof message !== "string" ||
+    message.length < 10 ||
+    message.length > 255
+  ) {
+    res.status(400).send("Message must be between 10 and 255 characters.");
+    return;
+  }
+
   // axios
   //   .post("https://ogs.google.com/u/0/_/OneGoogleWidgetUi/idv/", ``, {
   //     headers: {

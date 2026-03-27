@@ -1,6 +1,6 @@
 const { apiRouter } = require("./web-server");
 
-const STUDENT_IDS = ["123456", "654321", "111111"];
+const STUDENT_IDS = ["12345678", "87654321", "11111111"];
 
 const isStudentIdValid = (req) => {
   return STUDENT_IDS.includes(req.cookies?.studentId);
@@ -8,6 +8,9 @@ const isStudentIdValid = (req) => {
 
 apiRouter.post("/login", (req, res) => {
   const { studentId } = req.body;
+  if (typeof studentId !== "string" || !/^\d{8}$/.test(studentId)) {
+    return res.status(400).json({ error: "Invalid student ID format" });
+  }
   console.log("Received student ID:", studentId);
   if (STUDENT_IDS.includes(studentId)) {
     res.cookie("studentId", studentId, { httpOnly: true });

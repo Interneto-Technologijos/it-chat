@@ -1,4 +1,5 @@
 const getResponse = (chatMessageElement, message, cb) => {
+  chatMessageElement.innerHTML = "Loading...";
   fetch("http://localhost:3000/api/message", {
     method: "POST",
     headers: {

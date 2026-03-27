@@ -1,7 +1,16 @@
 const loginButton = document.getElementById("loginButton");
 
+const studentIdInput = document.getElementById("studentId");
+
+loginButton.disabled = true;
+
+studentIdInput.addEventListener("input", () => {
+  const value = studentIdInput.value.trim();
+  loginButton.disabled = !/^\d{8}$/.test(value);
+});
+
 loginButton.addEventListener("click", () => {
-  const studentId = document.getElementById("studentId").value.trim();
+  const studentId = studentIdInput.value.trim();
   if (!studentId) {
     alert("Please enter your student ID.");
     return;
